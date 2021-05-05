@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>Contacto</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>Contacto</h1>
+      <br />
+      <form class="form" id="form">
+        <h5>Informacion Personal</h5>
+        <label>
+          Nombre:
+          <br />
+          <input type="text" id="nombre" name="nombre" placeholder="juan" />
+        </label>
+        <div id="validarUno" class="validar">Ingrese su nombre</div>
+        <br />
+        <label>
+          Apellido:
+          <br />
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            placeholder="perez"
+          />
+        </label>
+        <div id="validarDos" class="validar">Ingrese su apellido</div>
+        <br />
+        <label>
+          Edad:
+          <br />
+          <input type="text" id="edad" name="edad" placeholder="18" />
+        </label>
+        <div id="validarTres" class="validar">
+          Ingrese una edad entre 18 y 90
+        </div>
+        <br />
+        <label id="radio">
+          <input type="radio" name="genero" value="masculino" /> Masculino
+          <input type="radio" name="genero" value="femenino" /> Femenino
+          <input type="radio" name="genero" value="otro" /> Otro
+        </label>
+        <div id="validarCuatro" class="validar">Seleccione genero</div>
+        <h5>Informacion adicional</h5>
+        <label>
+          Empresa:
+          <br />
+          <input
+            type="text"
+            id="empresa"
+            name="empresa"
+            placeholder="Empresa patito"
+          />
+        </label>
+        <div id="validarCinco" class="validar">
+          Ingrese el nombre de la empresa
+        </div>
+
+        <br />
+        <input type="submit" class="button" id="enviar" value="enviar" />
+        <button class="button" id="borrar">Limpiar</button>
+      </form>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/javascript/logic.js"></script>
+  </body>
+</html>

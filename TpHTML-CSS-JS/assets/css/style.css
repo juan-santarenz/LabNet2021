@@ -1,0 +1,55 @@
+main {
+  text-align: center;
+  font-family: "Ubuntu", sans-serif;
+}
+
+.form {
+  width: 60%;
+  height: 430px;
+  margin: auto;
+  border: none;
+  border-radius: 40px 10px;
+  background-color: #f7c477;
+  box-shadow: 7px 13px 37px #000;
+}
+
+label {
+  margin-top: 10px;
+}
+
+input {
+  text-align: center;
+  border: 1px black solid;
+  border-radius: 10px !important;
+}
+
+::placeholder {
+  text-align: center;
+}
+
+.button {
+  background-color: white;
+  border-radius: 10px !important;
+  border: 1px solid black;
+}
+
+.button:hover {
+  background-color: #42dd29;
+  color: white;
+}
+
+.validar {
+  -webkit-boxshadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  -o-box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  background: red;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-size: 14px;
+  margin-top: -50px;
+  margin-left: 450px;
+  padding: 5px;
+  position: absolute;
+  display: none;
+  border-radius: 10px !important;
+}
