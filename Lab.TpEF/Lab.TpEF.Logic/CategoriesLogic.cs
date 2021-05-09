@@ -38,5 +38,10 @@ namespace Lab.TpEF.Logic
 
             context.SaveChanges();
         }
+
+        public Categories GetOne(int id)
+        {
+            return context.Categories.Find(id);
+        }
     }
 }

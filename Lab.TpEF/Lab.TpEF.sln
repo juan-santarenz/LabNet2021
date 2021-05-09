@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.TpEF.Data", "Lab.TpEF.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.TpEF.Entities", "Lab.TpEF.Entities\Lab.TpEF.Entities.csproj", "{467A429F-350F-4F1C-B32A-418127A1DB0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.TpEF.MVC", "Lab.TpEF.MVC\Lab.TpEF.MVC.csproj", "{EEC9B7A2-57B7-4E6F-81AC-F5CC0255AEAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{467A429F-350F-4F1C-B32A-418127A1DB0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{467A429F-350F-4F1C-B32A-418127A1DB0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{467A429F-350F-4F1C-B32A-418127A1DB0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC9B7A2-57B7-4E6F-81AC-F5CC0255AEAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC9B7A2-57B7-4E6F-81AC-F5CC0255AEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC9B7A2-57B7-4E6F-81AC-F5CC0255AEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC9B7A2-57B7-4E6F-81AC-F5CC0255AEAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,16 @@
+﻿@model Lab.TpEF.MVC.Models.CategoriesView
+@{
+    ViewBag.Title = "Insert Category";
+}
+
+<h1>Insertar/Editar nueva categoria: </h1>
+
+@using (Html.BeginForm($"{ViewBag.Message}", "Categories", FormMethod.Post,  new {@id = "form"}))
+{
+    <div class="form-group">
+
+        <label>Name: </label> @Html.TextBoxFor(c => c.Name, new { @class = "form-control"})
+        <br/><label>Description: </label> @Html.TextBoxFor(c => c.Description, new { @class = "form-control" })
+        <br/><input type="submit" value="enviar" class="btn btn-success" />
+    </div>
+}
