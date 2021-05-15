@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Lab.TpEf.API.Models;
 using Lab.TpEF.Data;
 using Lab.TpEF.Entities;
 using Lab.TpEF.Logic;
@@ -20,6 +21,7 @@ namespace Lab.TpEf.API.Controllers
         private CategoriesLogic logic = new CategoriesLogic();
 
         // GET: api/Categories
+        // GET: api/Categories
         public List<Categories> GetCategories()
         {
             return logic.GetAll();
@@ -29,7 +31,7 @@ namespace Lab.TpEf.API.Controllers
         [ResponseType(typeof(Categories))]
         public IHttpActionResult GetCategories(int id)
         {
-            Categories categories = db.Categories.Find(id);
+            Categories categories = logic.GetOne(id);
             if (categories == null)
             {
                 return NotFound();
@@ -42,6 +44,7 @@ namespace Lab.TpEf.API.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutCategories(int id, Categories categories)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -51,24 +54,8 @@ namespace Lab.TpEf.API.Controllers
             {
                 return BadRequest();
             }
-
-            db.Entry(categories).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoriesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            
+            logic.Update(categories);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -82,8 +69,8 @@ namespace Lab.TpEf.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Categories.Add(categories);
-            db.SaveChanges();
+            logic.Add(categories);
+            //db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = categories.CategoryID }, categories);
         }
@@ -92,14 +79,13 @@ namespace Lab.TpEf.API.Controllers
         [ResponseType(typeof(Categories))]
         public IHttpActionResult DeleteCategories(int id)
         {
-            Categories categories = db.Categories.Find(id);
+            Categories categories = logic.GetOne(id);
             if (categories == null)
             {
                 return NotFound();
             }
 
-            db.Categories.Remove(categories);
-            db.SaveChanges();
+            logic.Delete(id);
 
             return Ok(categories);
         }
