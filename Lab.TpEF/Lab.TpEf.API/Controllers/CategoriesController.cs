@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using Lab.TpEf.API.Models;
 using Lab.TpEF.Data;
@@ -15,20 +16,28 @@ using Lab.TpEF.Logic;
 
 namespace Lab.TpEf.API.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers:"*", methods:"*")]
     public class CategoriesController : ApiController
     {
-        private NorthwindContext db = new NorthwindContext();
         private CategoriesLogic logic = new CategoriesLogic();
 
         // GET: api/Categories
-        // GET: api/Categories
-        public List<Categories> GetCategories()
+        public List<CategoriesView> GetCategories()
         {
-            return logic.GetAll();
+            List<Categories> categories = logic.GetAll();
+
+            List<CategoriesView> categoriesViews = categories.Select(s => new CategoriesView
+            {
+                CategoryID = s.CategoryID,
+                CategoryName = s.CategoryName,
+                Description = s.Description,
+            }).ToList();
+
+            return categoriesViews;
         }
 
         // GET: api/Categories/5
-        [ResponseType(typeof(Categories))]
+        [ResponseType(typeof(CategoriesView))]
         public IHttpActionResult GetCategories(int id)
         {
             Categories categories = logic.GetOne(id);
@@ -37,12 +46,28 @@ namespace Lab.TpEf.API.Controllers
                 return NotFound();
             }
 
-            return Ok(categories);
+            try
+            {
+                
+                CategoriesView categoriesView = new CategoriesView
+                {
+                    CategoryID = categories.CategoryID,
+                    CategoryName = categories.CategoryName,
+                    Description = categories.Description
+                };
+
+                return Ok(categoriesView);
+            }
+            catch (Exception)
+            {
+
+                return InternalServerError();
+            }
         }
 
         // PUT: api/Categories/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCategories(int id, Categories categories)
+        public IHttpActionResult PutCategories(int id, CategoriesView categories)
         {
             
             if (!ModelState.IsValid)
@@ -54,25 +79,53 @@ namespace Lab.TpEf.API.Controllers
             {
                 return BadRequest();
             }
-            
-            logic.Update(categories);
+            try
+            {
+                Categories categoriesView = new Categories
+                {
+                    CategoryID = categories.CategoryID,
+                    CategoryName = categories.CategoryName,
+                    Description = categories.Description
+                };
+                logic.Update(categoriesView);
 
-            return StatusCode(HttpStatusCode.NoContent);
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            catch (Exception)
+            {
+
+                return InternalServerError();
+            }
+            
         }
 
         // POST: api/Categories
-        [ResponseType(typeof(Categories))]
-        public IHttpActionResult PostCategories(Categories categories)
+        [ResponseType(typeof(CategoriesView))]
+        public IHttpActionResult PostCategories(CategoriesView categories)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            logic.Add(categories);
-            //db.SaveChanges();
+            try
+            {
+                Categories categoryEntity = new Categories
+                {
+                    CategoryID = categories.CategoryID,
+                    CategoryName = categories.CategoryName,
+                    Description = categories.Description
+                };
+                logic.Add(categoryEntity);
 
-            return CreatedAtRoute("DefaultApi", new { id = categories.CategoryID }, categories);
+                return CreatedAtRoute("DefaultApi", new { id = categories.CategoryID }, categories);
+            }
+            catch (Exception)
+            {
+
+                return InternalServerError();
+            }
+            
         }
 
         // DELETE: api/Categories/5
@@ -84,24 +137,18 @@ namespace Lab.TpEf.API.Controllers
             {
                 return NotFound();
             }
-
-            logic.Delete(id);
-
-            return Ok(categories);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            try
             {
-                db.Dispose();
+                logic.Delete(id);
+
+                return Ok(categories);
             }
-            base.Dispose(disposing);
+            catch (Exception)
+            {
+
+                return InternalServerError();
+            }
         }
 
-        private bool CategoriesExists(int id)
-        {
-            return db.Categories.Count(e => e.CategoryID == id) > 0;
-        }
     }
 }
