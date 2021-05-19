@@ -1,0 +1,20 @@
+<app-header></app-header>
+
+<div class="container">
+    <h1>Crear Nueva Categoria:</h1>
+    <form [formGroup]="nuevaCategoria" (ngSubmit)="postForm(nuevaCategoria.value)">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="CategoryName">
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Descripcion</label>
+            <input type="text" class="form-control" formControlName="Description">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Neva Categoria</button>
+        <span>&nbsp;&nbsp;</span>
+        <button type="button" class="btn btn-dark" (click)="lista()">Volver a la lista</button>
+    </form>
+</div>

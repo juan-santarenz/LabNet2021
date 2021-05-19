@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+
+<div class="container">
+    <h1>Editar Categoria:</h1>
+    <form [formGroup]="editarCategoria" (ngSubmit)="putForm(editarCategoria.value)">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="CategoryName">
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Descripcion</label>
+            <input type="text" class="form-control" formControlName="Description">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Editar Categoria</button>
+        <span>&nbsp;&nbsp;</span>
+        <button type="button" class="btn btn-danger" (click)="eliminar()">Elimiar Categoria</button>
+        <span>&nbsp;&nbsp;</span>
+        <button type="button" class="btn btn-dark" (click)="lista()">Volver a la lista</button>
+    </form>
+</div>
