@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Categories } from '../../modelo/categories';
 import { ServicioService } from '../../servicio/servicio.service';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-editar',
@@ -11,18 +11,34 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class EditarComponent implements OnInit {
 
-  constructor(private activeRoute:ActivatedRoute, private ruta:Router, private api:ServicioService) { }
+  constructor(private activeRoute:ActivatedRoute, private ruta:Router, private api:ServicioService, private fb:FormBuilder) { }
 
   categoria:Categories;
+  editarCategoria:FormGroup;
 
-  editarCategoria = new FormGroup({
+  get categoryIdCtrl(): AbstractControl {
+    return this.editarCategoria.get('Description');
+  }
+  get categoryNameCtrl(): AbstractControl {
+    return this.editarCategoria.get('CategoryName');
+  }
+
+  get descriptionCtrl(): AbstractControl {
+    return this.editarCategoria.get('Description');
+  }
+  /* editarCategoria = new FormGroup({
     CategoryID: new FormControl ('', Validators.required),
     CategoryName : new FormControl ('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
     Description : new FormControl ('', [Validators.required, Validators.minLength(5), Validators.maxLength(50)])
-  })
+  }) */
 
 
   ngOnInit(): void {
+    this.editarCategoria = this.fb.group({
+      CategoryID: ['', Validators.required],
+      CategoryName : ['', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]],
+      Description : ['', [Validators.required, Validators.minLength(5), Validators.maxLength(50)]]
+    });
     let cateogiraId = this.activeRoute.snapshot.paramMap.get('id');
     this.api.getOne(cateogiraId).subscribe(data =>{
       this.categoria = data;
@@ -38,6 +54,10 @@ export class EditarComponent implements OnInit {
   putForm(form:Categories){
     this.api.put(form).subscribe(data =>{
       console.log(data);
+      if(this.editarCategoria.valid){
+        this.api.showSucces('Categoria Actualizada', 'Hecho');
+        this.ruta.navigate(['lista']);
+      }
     });
   }
 
@@ -45,7 +65,10 @@ export class EditarComponent implements OnInit {
     let datos:Categories = this.editarCategoria.value;
     this.api.delete(datos).subscribe(data => {
       console.log(data);
-      this.ruta.navigate(['lista']);
+      if(this.editarCategoria.valid){
+        this.api.showSucces('Categoria Eliminada', 'Hecho');
+        this.ruta.navigate(['lista']);
+      }
     })
   }
 

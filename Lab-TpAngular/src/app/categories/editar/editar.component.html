@@ -7,14 +7,34 @@
         <div class="form-group">
             <label>Nombre</label>
             <input type="text" class="form-control" formControlName="CategoryName">
+            <div *ngIf="categoryNameCtrl?.invalid && categoryNameCtrl?.touched">
+                <small *ngIf="categoryNameCtrl?.errors?.required" class="text-danger">El nombre es
+                    requerido</small>
+                <small *ngIf="categoryNameCtrl?.errors?.maxlength" class="text-danger">El nombre no puede superar los
+                    15
+                    caracteres</small>
+                <small *ngIf="categoryNameCtrl?.errors?.minlength" class="text-danger">El nombre debe tener un minimo
+                    de 3
+                    caracteres</small>
+            </div>
         </div>
         <br>
         <div class="form-group">
             <label>Descripcion</label>
             <input type="text" class="form-control" formControlName="Description">
+            <div *ngIf="descriptionCtrl?.invalid && descriptionCtrl?.touched">
+                <small *ngIf="descriptionCtrl?.errors?.required" class="text-danger">La descripcion es
+                    requerida</small>
+                <small *ngIf="descriptionCtrl?.errors?.maxlength" class="text-danger">La descripcion no puede superar
+                    los 50 caracteres</small>
+                <small *ngIf="descriptionCtrl?.errors?.minlength" class="text-danger">La descripcion debe tener un
+                    minimo
+                    de 5
+                    caracteres</small>
+            </div>
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">Editar Categoria</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!editarCategoria.valid">Editar Categoria</button>
         <span>&nbsp;&nbsp;</span>
         <button type="button" class="btn btn-danger" (click)="eliminar()">Elimiar Categoria</button>
         <span>&nbsp;&nbsp;</span>
