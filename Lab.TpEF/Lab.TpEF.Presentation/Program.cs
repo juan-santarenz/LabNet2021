@@ -11,10 +11,10 @@ namespace Lab.TpEF.Presentation
     {
         static void Main(string[] args)
         {
-            ProductsLogic products = new ProductsLogic();
-            CategoriesLogic categories = new CategoriesLogic();
-            CategoriesMethods categoriesmethods = new CategoriesMethods(categories);
-            ProductMethods productMethods = new ProductMethods(products);
+           CategoriesMethods categoriesmethods = new CategoriesMethods();
+          
+            ProductMethods productMethods = new ProductMethods();
+
             categoriesmethods.Mostrar();
             productMethods.Mostrar();
 
@@ -69,10 +69,6 @@ namespace Lab.TpEF.Presentation
                 catch (FormatException)
                 {
                     Console.WriteLine($"El campo esta vacio o ingreso un caracter");
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
                 }
                 Console.WriteLine();
                 Console.WriteLine($"1- Uno para continuar\n0- Cero para salir");

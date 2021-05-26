@@ -10,16 +10,7 @@ namespace Lab.TpEF.Presentation
 {
     public class ProductMethods
     {
-        private ProductsLogic products;
-        public ProductsLogic GetProducts()
-        {
-            return products;
-        }
-
-        public ProductMethods(ProductsLogic products)
-        {
-            this.products = products;
-        }
+        ProductsLogic products = new ProductsLogic();
         
         public void Mostrar()
         {

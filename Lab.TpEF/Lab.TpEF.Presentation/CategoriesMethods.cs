@@ -10,16 +10,8 @@ namespace Lab.TpEF.Presentation
 {
     public class CategoriesMethods : IMetodos
     {
-        private CategoriesLogic categories;
-
-        public CategoriesLogic GetCategories()
-        {
-            return categories;
-        }
-        public CategoriesMethods(CategoriesLogic categories)
-        {
-            this.categories = categories;
-        }
+        
+        CategoriesLogic categories = new CategoriesLogic();
 
         public void Mostrar()
         {
@@ -33,26 +25,55 @@ namespace Lab.TpEF.Presentation
 
         public void MenuAdd(int id, string name, string description)
         {
-            categories.Add(new Categories
+            try
             {
-                CategoryID = id,
-                CategoryName = name,
-                Description = description
-            });
+                categories.Add(new Categories
+                {
+                    CategoryID = id,
+                    CategoryName = name,
+                    Description = description
+                });
+            }
+            catch (Exception)
+            {
+
+                Console.WriteLine("\nLa categoria no pudo ser guardada por que algun dato no es correcto... presione una tecla para continuar");
+                Console.ReadKey();
+            }
         }
 
         public void MuneUpdate(string description, int id)
         {
-            categories.Update(new Categories
+            try
             {
-                Description = description,
-                CategoryID = id
-            });
+                categories.Update(new Categories
+                {
+                    CategoryID = id,
+                    Description = description
+                });
+            }
+            catch (NullReferenceException)
+            {
+
+                Console.WriteLine("\nEl ID ingresado no corresponde a una categoria... presione una tecla para continuar");
+                Console.ReadKey();
+            }
+           
         }
 
         public void MenuDelete(int id)
         {
-            categories.Delete(id);
+            try
+            {
+                categories.Delete(id);
+            }
+            catch (InvalidOperationException)
+            {
+                
+                Console.WriteLine($"\nEl ID ingresado no corresponde a una categoria... precione una tecla para continuar");
+                Console.ReadKey();
+            }
+            
         }
     }
 }

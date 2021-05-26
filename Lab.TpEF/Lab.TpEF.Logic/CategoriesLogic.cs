@@ -11,18 +11,36 @@ namespace Lab.TpEF.Logic
     {
         public void Add(Categories newItem)
         {
-            context.Categories.Add(newItem);
+            try
+            {
+                context.Categories.Add(newItem);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
 
         public void Delete(int id)
         {
-            var elementoAEliminar = context.Categories.First(r => r.CategoryID == id);
+            try
+            {
+                var elementoAEliminar = context.Categories.First(r => r.CategoryID == id);
 
-            context.Categories.Remove(elementoAEliminar);
+                context.Categories.Remove(elementoAEliminar);
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            catch (InvalidOperationException)
+            {
+
+                throw;
+            }
+
         }
 
         public List<Categories> GetAll()
@@ -30,13 +48,21 @@ namespace Lab.TpEF.Logic
             return context.Categories.ToList();
         }
 
-        public void Update(Categories updateItem)
+        public void Update(Categories updateItem) // revisar
         {
-            var update = context.Categories.Find(updateItem.CategoryID);
+            try
+            {
+                var update = context.Categories.Find(updateItem.CategoryID);
 
-            update.Description = updateItem.Description;
+                update.Description = updateItem.Description;
 
-            context.SaveChanges();
+                context.SaveChanges();
+            }
+            catch (NullReferenceException)
+            {
+
+                throw;
+            }
         }
 
         public Categories GetOne(int id)
